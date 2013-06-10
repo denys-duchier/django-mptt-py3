@@ -1,6 +1,6 @@
 
 
-VERSION = (0, 5,)# '+dev')
+VERSION = (0, 5, 3)# '+dev')
 
 
 # NOTE: This method was removed in 0.4.0, but restored in 0.4.2 after use-cases were
