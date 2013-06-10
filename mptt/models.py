@@ -1,4 +1,4 @@
-from __future__ import unicode_literals
+
 from functools import reduce
 import operator
 import threading
@@ -83,7 +83,7 @@ class MPTTOptions(object):
             self.order_insertion_by = []
 
     def __iter__(self):
-        return ((k, v) for k, v in self.__dict__.items() if k[0] != '_')
+        return ((k, v) for k, v in list(self.__dict__.items()) if k[0] != '_')
 
     # Helper methods for accessing tree attributes on models.
     def get_raw_field_value(self, instance, field_name):
@@ -436,7 +436,7 @@ class MPTTModel(six.with_metaclass(MPTTModelBase, models.Model)):
             return
 
         if num_inserted < 0:
-            deleted = range(tree_id + num_inserted, -num_inserted)
+            deleted = list(range(tree_id + num_inserted, -num_inserted))
             changes.difference_update(deleted)
         new_changes = set([(t + num_inserted if t >= tree_id else t) for t in changes])
         cls._threadlocal.mptt_delayed_tree_changes = new_changes
@@ -773,7 +773,7 @@ class MPTTModel(six.with_metaclass(MPTTModelBase, models.Model)):
             same_order = old_parent_id == parent_id
             if same_order and len(self._mptt_cached_fields) > 1:
                 get_raw_field_value = opts.get_raw_field_value
-                for field_name, old_value in self._mptt_cached_fields.items():
+                for field_name, old_value in list(self._mptt_cached_fields.items()):
                     if old_value != get_raw_field_value(self, field_name):
                         same_order = False
                         break

@@ -2,7 +2,7 @@
 Utilities for working with lists of model instances which represent
 trees.
 """
-from __future__ import unicode_literals
+
 import copy
 import csv
 import itertools
@@ -31,7 +31,7 @@ def previous_current_next(items):
         next(nex)
     except StopIteration:
         pass
-    return zip(prev, cur, nex)
+    return list(zip(prev, cur, nex))
 
 
 def tree_item_iterator(items, ancestors=False):

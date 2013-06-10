@@ -1,7 +1,7 @@
 """
 A custom manager for working with trees of objects.
 """
-from __future__ import unicode_literals
+
 import contextlib
 
 from django.db import models, transaction, connections, router
@@ -208,7 +208,7 @@ class TreeManager(models.Manager):
     def _translate_lookups(self, **lookups):
         new_lookups = {}
         join_parts = '__'.join
-        for k, v in lookups.items():
+        for k, v in list(lookups.items()):
             parts = k.split('__')
             new_parts = []
             new_parts__append = new_parts.append

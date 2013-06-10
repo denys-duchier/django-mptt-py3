@@ -1,7 +1,7 @@
 """
 MPTT exceptions.
 """
-from __future__ import unicode_literals
+
 
 
 class InvalidMove(Exception):
